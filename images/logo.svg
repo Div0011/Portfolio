@@ -1,0 +1,46 @@
+<svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Define styles -->
+  <defs>
+    <style>
+      .logo-text {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 900;
+        font-size: 16px;
+        fill: #e5e2d6;
+        letter-spacing: -1px;
+        text-anchor: middle;
+        writing-mode: tb;
+        glyph-orientation-vertical: 0;
+      }
+    </style>
+  </defs>
+  
+  <!-- Cyan stripe -->
+  <rect x="8" y="10" width="3" height="60" rx="1.5" fill="#00d4ff"/>
+  
+  <!-- Purple stripe -->
+  <rect x="18" y="10" width="3" height="60" rx="1.5" fill="#7c3aed"/>
+  
+  <!-- Cyan stripe -->
+  <rect x="28" y="10" width="3" height="60" rx="1.5" fill="#06b6d4"/>
+  
+  <!-- Text group - rotated 90 degrees -->
+  <g transform="translate(60, 20) rotate(90)">
+    <!-- DIVYANSH -->
+    <text class="logo-text" x="0" y="0" font-size="18" dominant-baseline="middle">
+      DIVYANSH
+    </text>
+    
+    <!-- AWASTHI -->
+    <text class="logo-text" x="0" y="30" font-size="18" dominant-baseline="middle">
+      AWASTHI
+    </text>
+  </g>
+  
+  <!-- Alternative horizontal layout for responsive use -->
+  <!-- Uncomment below and comment above for horizontal version -->
+  <!--
+  <text x="50" y="20" class="logo-text" font-size="14" text-anchor="middle">DIVYANSH</text>
+  <text x="50" y="40" class="logo-text" font-size="14" text-anchor="middle">AWASTHI</text>
+  -->
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" width="220" height="60" fill="none">
+  <!-- TOP ROW: DIVYANSH (small) + three horizontal stripes to the right -->
+  <text
+    x="0" y="17"
+    font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+    font-size="12.5"
+    font-weight="600"
+    letter-spacing="3.5"
+    fill="#292f33"
+    text-anchor="start"
+  >DIVYANSH</text>
+
+  <!-- Stripes — horizontally to the right of DIVYANSH, vertically stacked -->
+  <rect x="112" y="5"  width="36" height="5" rx="1.5" fill="#5da9e9"/>
+  <rect x="112" y="12" width="36" height="5" rx="1.5" fill="#067bc2"/>
+  <rect x="112" y="19" width="36" height="5" rx="1.5" fill="#004b8d"/>
+
+  <!-- BOTTOM ROW: AWASTHI (big, bold, dark) -->
+  <text
+    x="0" y="54"
+    font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+    font-size="34"
+    font-weight="900"
+    letter-spacing="-1.5"
+    fill="#292f33"
+    text-anchor="start"
+  >AWASTHI</text>
+</svg>
