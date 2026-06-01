@@ -1,0 +1,668 @@
+/* ============================================================
+   CONTACT PAGE SCROLLING — Disable scrolling
+   ============================================================ */
+
+html body {
+  overflow: hidden !important;
+  height: 100% !important;
+}
+
+/* ============================================================
+   STICKER TRAIL — Stickers follow cursor on contact page
+   ============================================================ */
+
+.trail-section {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 10 !important;
+  overflow: hidden !important;
+}
+
+.trail-wrap {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.trail-list {
+  position: relative !important;
+}
+
+.trail-item {
+  position: fixed !important;
+  pointer-events: none !important;
+  display: none !important;
+  z-index: 10 !important;
+}
+
+.trail-item__img {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+.trail-item__img.small-l {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.trail-item__img.small-h {
+  width: 45px !important;
+  height: 45px !important;
+}
+
+.trail-item__img {
+  width: 60px !important;
+  height: 60px !important;
+}
+
+/* Outer nav brand link — stacks rows vertically, aligned to start */
+a.wrapper-brand,
+a.wrapper-brand-small {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0 !important;
+  text-decoration: none !important;
+  width: fit-content !important;
+}
+
+/* Column wrapper holding the two rows (if present, fallback) */
+a.wrapper-brand > div,
+a.wrapper-brand-small > div {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+/* Header logo top row: DIVYANSH text + stripes side-by-side in a row */
+.wrapper-top__brand,
+.wrapper-top__brand-small {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.5em !important;
+  width: fit-content !important;
+}
+
+/* DIVYANSH — small, tracked, medium weight */
+.type-brand-studio {
+  font-size: 0.35em !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+/* Stripes container — sits to the RIGHT of DIVYANSH */
+.wrapper-stroke {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.08em !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Hide the black duplicate stripes — show only color stripes */
+.wrapper-stroke-black {
+  display: none !important;
+}
+
+.wrapper-stroke-color {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.08em !important;
+  position: relative !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Each colored stripe */
+.brand-stroke-red,
+.brand-stroke-yellow,
+.brand-stroke-purple {
+  height: 0.12em !important;
+  width: 1.1em !important;
+  border-radius: 0.05em !important;
+  display: block !important;
+}
+
+/* Blue palette overrides */
+.brand-stroke-red    { background-color: #5da9e9 !important; }
+.brand-stroke-yellow { background-color: #067bc2 !important; }
+.brand-stroke-purple { background-color: #004b8d !important; }
+
+/* AWASTHI — large, heavy, tight tracking */
+.type-brand-alphonse {
+  font-size: 1em !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  margin-top: 0.08em !important;
+}
+
+/* Smaller nav variant (section-nav-small) */
+.size-page.type-brand-studio {
+  font-size: 0.35em !important;
+}
+a.wrapper-brand-small .type-brand-alphonse {
+  font-size: 1em !important;
+}
+a.wrapper-brand-small .brand-stroke-red,
+a.wrapper-brand-small .brand-stroke-yellow,
+a.wrapper-brand-small .brand-stroke-purple {
+  width: 1.1em !important;
+  height: 0.12em !important;
+}
+
+/* Hover lift on entire logo block */
+a.wrapper-brand:hover,
+a.wrapper-brand-small:hover {
+  transform: translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+/* ============================================================
+   IMAGE PERFORMANCE — lazy-loaded images
+   ============================================================ */
+img[loading="lazy"] {
+  /* Smooth fade-in once intersection observer unlocks them */
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+img[loading="lazy"].img-loaded {
+  opacity: 1;
+}
+
+/* Portrait / large images — prevent layout shift */
+.affiche__postprod,
+.img-vignette__vhs,
+.img-hover__vhs,
+.img-affiche-prod {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ============================================================
+   SCROLL PERFORMANCE — reduce paint layers for scrollable
+   ============================================================ */
+.cl-layout-vhs,
+.cl-list-wrapper,
+.skills-carousel-track,
+.section-height,
+.sticky-element {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Video — hardware accelerated */
+video {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ============================================================
+   SCROLL ANIMATIONS — respect reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ============================================================
+   PROJECTS SLIDESHOW — stable height prevents layout shift
+   ============================================================ */
+.projects-slider-viewport {
+  contain: layout style;
+}
+
+/* ============================================================
+   CASSETTE TRACK — GPU-composited infinite scroll
+   ============================================================ */
+.skills-carousel-track {
+  contain: layout style;
+}
+
+/* ============================================================
+   CRITICAL ABOVE-FOLD — content-visibility for off-screen
+   ============================================================ */
+.section-projets-post-prod,
+.section-prod-bottom,
+.section-citation {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* ============================================================
+   STICKER CURSOR TRAIL — floats over the full contact section
+   ============================================================ */
+
+/* Outer trail wrapper — covers the entire contact section */
+.trail-section {
+  z-index: 1000 !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  inset: 0% !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+
+/* Inner scroll container */
+.trail-wrap {
+  z-index: 5 !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  inset: 0% !important;
+  pointer-events: none !important;
+}
+
+/* Relative positioning context for trail items */
+.trail-list {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+/* Each sticker — hidden by default, GSAP animates them in */
+.trail-item {
+  opacity: 0 !important;
+  position: absolute !important;
+  pointer-events: none !important;
+  display: none;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4)) !important;
+}
+
+/* Sticker image sizes */
+.trail-item__img {
+  max-width: 220px !important;
+  max-height: 140px !important;
+  width: auto !important;
+  height: auto !important;
+  display: block !important;
+}
+.trail-item__img.small-l {
+  max-width: 170px !important;
+}
+.trail-item__img.small-h {
+  max-height: 100px !important;
+}
+
+/* Make the contact section a positioning context for trail */
+.section-contact {
+  background-color: #1e2224 !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.fixed-footer-contact {
+  overflow: hidden !important;
+}
+
+.fixed-footer-contact body {
+  overflow: hidden !important;
+}
+
+/* Base contact item container styling */
+a.info__contact {
+  border: 1px solid rgba(229, 226, 214, 0.15) !important;
+  background-color: rgba(255, 255, 255, 0.01) !important;
+  color: #e5e2d6 !important;
+  border-radius: 6px !important;
+  height: 5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* Hover effect: crisp clean glow without clunky color outlines */
+a.info__contact:hover {
+  border-color: rgba(229, 226, 214, 0.6) !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Remove clunky border color states */
+a.info__contact.adresse,
+a.info__contact.phone {
+  border-color: rgba(229, 226, 214, 0.15) !important;
+}
+a.info__contact.adresse:hover,
+a.info__contact.phone:hover {
+  border-color: rgba(229, 226, 214, 0.6) !important;
+}
+
+/* Copy success state - premium solid brand blue background */
+a.info__contact.active-copy {
+  background-color: #004b8d !important;
+  border-color: #5da9e9 !important;
+  color: #fff !important;
+}
+
+/* Icon box - left side, wider for larger icons */
+.wrapper-icon__contact {
+  width: 5.5rem !important;
+  height: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Main icon sizing — larger for visual impact */
+.icon__contact {
+  width: 3.5rem !important;
+  height: 3.5rem !important;
+  color: #e5e2d6 !important;
+  opacity: 0.9 !important;
+}
+
+/* Monospace / Sleek grotesque email text centering */
+.wrapper-txt-email {
+  flex: 1 !important;
+  padding-left: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.wrapper-txt-email > div {
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.5px !important;
+  color: #e5e2d6 !important;
+  text-transform: lowercase !important;
+}
+
+/* Copier button - right side of email box */
+.wrapper-copy-email {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 0 25px !important;
+  height: 100% !important;
+  border-left: 1px solid rgba(229, 226, 214, 0.15) !important;
+}
+
+/* Mini copy icon */
+.icon__contact-copy {
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  color: #e5e2d6 !important;
+  opacity: 0.65 !important;
+}
+
+/* Copy text matching the screenshot */
+.wrapper-copy-email > div[fs-copyclip-message] {
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  text-transform: lowercase !important;
+  letter-spacing: 0.5px !important;
+  color: #e5e2d6 !important;
+  opacity: 0.65 !important;
+}
+
+/* Circular spinning badge — blue circle with revolving text */
+.wrapper-circle {
+  z-index: 1 !important;
+  aspect-ratio: 1 !important;
+  border-radius: 50% !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  overflow: visible !important;
+  background-color: #004b8d !important;
+  border: 2px solid rgba(229, 226, 214, 0.3) !important;
+  box-shadow: 0 16px 48px rgba(0, 75, 141, 0.5) !important;
+}
+
+.wrapper-circle svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Juggling lottie character container */
+.wrapper-perso-1 {
+  z-index: 2 !important;
+  pointer-events: none !important;
+}
+
+/* Contact page layout — tabs at top, name at bottom */
+.layout-contact {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  gap: 0 !important;
+  height: 100svh !important;
+  padding-top: 9vh !important;
+  padding-bottom: 3vh !important;
+  box-sizing: border-box !important;
+}
+
+/* Contact top row: info tabs LEFT, sticker RIGHT */
+.wrapper-contact-top {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  gap: 1.2rem !important;
+  margin-bottom: 0 !important;
+}
+
+/* Info tabs: location, phone, email — horizontal row */
+.wrapper-info__contact {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 0.8rem !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Sticker badge container — top-right, large, partially clipped */
+.wrapper-perso-2 {
+  position: relative !important;
+  width: 180px !important;
+  height: 180px !important;
+  flex-shrink: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  overflow: visible !important;
+}
+
+/* Revolving text animation keyframe */
+@keyframes spin-clockwise {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   BIG FOOTER BRAND LOGO (contact.html)
+   Matches the massive Studio Alphonse footer layout exactly
+   ============================================================ */
+
+.wrapper-brand-contact {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+  margin: 2rem 0 1rem 0 !important;
+}
+
+/* Row 1 container */
+.wrapper-brand-contact .wrapper-top__brand {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+  gap: 2vw !important;
+}
+
+/* Massive first row text */
+.wrapper-brand-contact .type-brand-studio {
+  font-size: 7.5vw !important;
+  font-weight: 900 !important;
+  font-variation-settings: "wght" 900, "wdth" 160 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 0.85 !important;
+  color: #e5e2d6 !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+/* Stripes container in footer - stretches to fill the row */
+.wrapper-brand-contact .wrapper-stroke {
+  flex-grow: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6vw !important;
+  margin-top: 0.6vw !important;
+}
+
+.wrapper-brand-contact .wrapper-stroke-color {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6vw !important;
+  width: 100% !important;
+}
+
+.wrapper-brand-contact .brand-stroke-red,
+.wrapper-brand-contact .brand-stroke-yellow,
+.wrapper-brand-contact .brand-stroke-purple {
+  height: 0.9vw !important;
+  width: 100% !important;
+  border-radius: 0.35vw !important;
+  display: block !important;
+}
+
+/* Row 2 container */
+.wrapper-brand-contact .wrapper-bottom__brand {
+  width: 100% !important;
+  display: flex !important;
+}
+
+/* Massive second row text */
+.wrapper-brand-contact .type-brand-alphonse {
+  font-size: 14vw !important;
+  font-weight: 900 !important;
+  font-variation-settings: "wght" 900, "wdth" 160 !important;
+  letter-spacing: -0.05em !important;
+  line-height: 0.78 !important;
+  color: #e5e2d6 !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  margin-top: -0.05em !important;
+}
+
+/* ============================================================
+   FOOTER LINKS STYLING — Compact and close to the name
+   ============================================================ */
+
+.layout-footer {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+  width: 100% !important;
+  margin-top: 0.8rem !important;
+}
+
+.wrapper-footer {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 1.5rem !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.wrapper-footer a {
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.5px !important;
+  color: #e5e2d6 !important;
+  text-decoration: none !important;
+  opacity: 0.85 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.wrapper-footer a:hover {
+  opacity: 1 !important;
+}
+
+.wrapper-footer-ml {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.wrapper-footer-ml a {
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.5px !important;
+  color: #e5e2d6 !important;
+  text-decoration: none !important;
+  opacity: 0.75 !important;
+}
+
+.layout-footer > div:not(.wrapper-footer):not(.wrapper-footer-ml) {
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.5px !important;
+  color: #e5e2d6 !important;
+  opacity: 0.85 !important;
+}
+
+/* ============================================================
+   MOBILE & TOUCH SCREEN OVERRIDES (PREVENTS INTERACTION GLITCHES)
+   ============================================================ */
+@media (hover: none) {
+  /* Disable custom SVG cursor and restore native pointer behavior */
+  .cursor, 
+  .txt-cursor {
+    display: none !important;
+  }
+  
+  body.is--cursor,
+  body.is--cursor * {
+    cursor: auto !important;
+  }
+
+  /* Prevent non-active menu items' hover stickers from displaying or getting stuck on touch devices */
+  .menu-item:not(.w--current) .wrapper-stickers-menu {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+
