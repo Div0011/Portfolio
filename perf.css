@@ -1308,3 +1308,9 @@ a.info__contact.active-copy {
 .section-projets-post-prod .wrapper-description__postprod {
   flex-grow: 1 !important;
 }
+
+/* Styling for drag stickers speech bubble on about page */
+.about-slideshow-speech {
+  margin-bottom: 20px !important;
+  text-align: center !important;
+}
