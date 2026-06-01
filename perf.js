@@ -223,7 +223,7 @@
     // 1. Append the Permanent Sticker (sticker_8.png) if not already added
     if (!menuNav.querySelector('.menu-permanent-sticker')) {
       const permanentImg = document.createElement('img');
-      permanentImg.src = 'images/stickers/sticker_8.png';
+      permanentImg.src = 'images/stickers/sticker_8.webp';
       permanentImg.className = 'menu-permanent-sticker';
       permanentImg.alt = 'Decorative Menu Sticker';
       permanentImg.loading = 'lazy';
@@ -233,21 +233,21 @@
 
     // 2. Define target stickers for hover mapping
     const optionStickers = {
-      'projects.html': 'images/stickers/sticker_11.png',
-      'contact.html': 'images/stickers/sticker_12.png',
-      'skills.html': 'images/stickers/sticker_3.png',
-      'experience.html': 'images/stickers/sticker_5.png'
+      'projects.html': 'images/stickers/sticker_11.webp',
+      'contact.html': 'images/stickers/sticker_12.webp',
+      'skills.html': 'images/stickers/sticker_3.webp',
+      'experience.html': 'images/stickers/sticker_5.webp'
     };
 
     // Pool of other random stickers to choose from
     const randomPool = [
-      'images/stickers/sticker_1.png',
-      'images/stickers/sticker_2.png',
-      'images/stickers/sticker_4.png',
-      'images/stickers/sticker_6.png',
-      'images/stickers/sticker_7.png',
-      'images/stickers/sticker_9.png',
-      'images/stickers/sticker_10.png'
+      'images/stickers/sticker_1.webp',
+      'images/stickers/sticker_2.webp',
+      'images/stickers/sticker_4.webp',
+      'images/stickers/sticker_6.webp',
+      'images/stickers/sticker_7.webp',
+      'images/stickers/sticker_9.webp',
+      'images/stickers/sticker_10.webp'
     ];
 
     const allStickersPool = [
