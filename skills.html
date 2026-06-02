@@ -252,6 +252,8 @@ html.lenis {
   transition: opacity 0.3s ease, max-height 0.4s ease !important;
   scrollbar-width: thin;
   scrollbar-color: rgba(0,0,0,0.2) transparent;
+  position: relative !important;
+  z-index: 5 !important;
 }
 .vhs-side-info-container::-webkit-scrollbar {
   width: 4px;
@@ -269,6 +271,10 @@ html.lenis {
   height: auto !important;
   margin: 0 0 20px 0 !important;
   flex: 1 1 auto !important;
+}
+
+.dropdown-vhs:hover .background__vhs {
+  background-color: var(--yellow) !important;
 }
 
 /* Bottom centered expanded logo box */
