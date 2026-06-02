@@ -669,9 +669,7 @@ closeMenuButton.addEventListener('click', function() {
 </script><script>
   $('.menu-item').click(function (e){e.preventDefault();var goTo = this.getAttribute("href");setTimeout(function(){window.location=goTo;},500);});
 </script><script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script><script>
-if (window.innerWidth > 991) {
-    setTimeout(() => document.body.classList.remove('no-scroll'), 1500);
-}
+setTimeout(() => document.body.classList.remove('no-scroll'), 1500);
 </script><script>
 if (Webflow.env("editor") === undefined) {
   setTimeout(function() {
@@ -751,6 +749,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   prevBtn.addEventListener("click", () => goToSlide(currentIndex - 1));
   nextBtn.addEventListener("click", () => goToSlide(currentIndex + 1));
+
+  // Horizontal touch swiping support for mobile/touch users
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  viewport.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe() {
+    const swipeThreshold = 50; // minimum distance in pixels
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        // swiped left, show next project
+        goToSlide(currentIndex + 1);
+      } else {
+        // swiped right, show previous project
+        goToSlide(currentIndex - 1);
+      }
+    }
+  }
 });
 </script>
 <script src="perf.js" defer></script>

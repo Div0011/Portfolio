@@ -1690,10 +1690,8 @@ closeMenuButton.addEventListener('click', function() {
    $('.menu-item').click(function (e){e.preventDefault();var goTo = this.getAttribute("href");setTimeout(function(){window.location=goTo;},500);});
   </script>
 <script>
-   // Vérifie si la largeur de l'écran est supérieure à 991px avant d'exécuter le setTimeout
-if (window.innerWidth > 991) {
-    setTimeout(() => document.body.classList.remove('no-scroll'), 5000);
-}
+   // Remove no-scroll after page loader finishes
+   setTimeout(() => document.body.classList.remove('no-scroll'), 5000);
   </script>
 <script>
    // Vérifie si la largeur de l'écran est supérieure à 991px avant d'ajouter l'écouteur d'événement

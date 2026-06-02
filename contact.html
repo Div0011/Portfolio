@@ -469,10 +469,7 @@ closeMenuButton.addEventListener('click', function() {
 </script><script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
 <script>
-// Vérifie si la largeur de l'écran est supérieure à 991px avant d'exécuter le setTimeout
-if (window.innerWidth > 991) {
-    setTimeout(() => document.body.classList.remove('no-scroll'), 1500);
-}
+setTimeout(() => document.body.classList.remove('no-scroll'), 1500);
 </script>
 <script>
 function initImageTrail(config = {}) {
@@ -698,54 +695,58 @@ document.addEventListener('DOMContentLoaded', () => {
   let activeTextStickerPos = { x: 0, y: 0 };
   let activeTextTimeout = null;
 
-  window.addEventListener('mousemove', (e) => {
-    // Disable sticker trail spawning when cursor is hovering over the menu screen or small header nav
-    if (e.target.closest('#menu-nav') || e.target.closest('.section-nav-small')) {
+  // Only enable the mousemove sticker trail if the device supports hover (desktop/laptop)
+  const supportsHover = window.matchMedia('(hover: hover)').matches;
+  if (supportsHover) {
+    window.addEventListener('mousemove', (e) => {
+      // Disable sticker trail spawning when cursor is hovering over the menu screen or small header nav
+      if (e.target.closest('#menu-nav') || e.target.closest('.section-nav-small')) {
+        if (activeTextSticker) {
+          fadeAndRemove(activeTextSticker);
+          activeTextSticker = null;
+        }
+        return;
+      }
+
+      // If we have an active sticker, check how far the cursor moved
       if (activeTextSticker) {
+        const dist = Math.hypot(e.clientX - activeTextStickerPos.x, e.clientY - activeTextStickerPos.y);
+        // Only trigger the next sticker transition if the cursor moved significantly (e.g., 100px)
+        if (dist < 100) {
+          return;
+        }
+        // Fade and scale out the current one smoothly
         fadeAndRemove(activeTextSticker);
         activeTextSticker = null;
       }
-      return;
-    }
 
-    // If we have an active sticker, check how far the cursor moved
-    if (activeTextSticker) {
-      const dist = Math.hypot(e.clientX - activeTextStickerPos.x, e.clientY - activeTextStickerPos.y);
-      // Only trigger the next sticker transition if the cursor moved significantly (e.g., 100px)
-      if (dist < 100) {
-        return;
-      }
-      // Fade and scale out the current one smoothly
-      fadeAndRemove(activeTextSticker);
-      activeTextSticker = null;
-    }
+      // Spawn the next sticker
+      const img = document.createElement('img');
+      img.src = stickers[Math.floor(Math.random() * stickers.length)];
+      img.className = 'sticker-trail-item';
+      img.style.left = e.clientX + 'px';
+      img.style.top = e.clientY + 'px';
+      const rot = Math.random() * 60 - 30;
+      img.style.setProperty('--rot', `rotate(${rot}deg)`);
+      document.body.appendChild(img);
 
-    // Spawn the next sticker
-    const img = document.createElement('img');
-    img.src = stickers[Math.floor(Math.random() * stickers.length)];
-    img.className = 'sticker-trail-item';
-    img.style.left = e.clientX + 'px';
-    img.style.top = e.clientY + 'px';
-    const rot = Math.random() * 60 - 30;
-    img.style.setProperty('--rot', `rotate(${rot}deg)`);
-    document.body.appendChild(img);
+      // Force a reflow and activate transition
+      img.offsetWidth;
+      img.classList.add('active');
 
-    // Force a reflow and activate transition
-    img.offsetWidth;
-    img.classList.add('active');
+      activeTextSticker = img;
+      activeTextStickerPos = { x: e.clientX, y: e.clientY };
 
-    activeTextSticker = img;
-    activeTextStickerPos = { x: e.clientX, y: e.clientY };
-
-    // Set a safety timeout to fade it out if the user stops moving for 2.5 seconds
-    if (activeTextTimeout) clearTimeout(activeTextTimeout);
-    activeTextTimeout = setTimeout(() => {
-      if (activeTextSticker === img) {
-        fadeAndRemove(img);
-        activeTextSticker = null;
-      }
-    }, 2500);
-  });
+      // Set a safety timeout to fade it out if the user stops moving for 2.5 seconds
+      if (activeTextTimeout) clearTimeout(activeTextTimeout);
+      activeTextTimeout = setTimeout(() => {
+        if (activeTextSticker === img) {
+          fadeAndRemove(img);
+          activeTextSticker = null;
+        }
+      }, 2500);
+    });
+  }
 
   function fadeAndRemove(element) {
     if (!element) return;

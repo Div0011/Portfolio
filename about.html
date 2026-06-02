@@ -705,9 +705,7 @@ $('.menu-item').click(function (e){
 </script>
 
 <script>
-if (window.innerWidth > 991) {
-    setTimeout(() => document.body.classList.remove('no-scroll'), 1500);
-}
+setTimeout(() => document.body.classList.remove('no-scroll'), 1500);
 </script>
 
 <!-- Lenis Smooth Scroll Config -->
@@ -974,8 +972,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3000);
   }
 
-  // Interactive 3D Card Hover Tilt
-  if (container) {
+  // Interactive 3D Card Hover Tilt (only enabled for hover-capable devices)
+  const supportsHover = window.matchMedia('(hover: hover)').matches;
+  if (container && supportsHover) {
     container.addEventListener("mousemove", (e) => {
       const rect = container.getBoundingClientRect();
       const x = e.clientX - rect.left;

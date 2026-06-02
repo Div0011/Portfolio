@@ -256,78 +256,81 @@
     ];
 
     // 3. Dynamic pop-up on menu hover logic
-    const menuItems = menuNav.querySelectorAll('.menu-item');
-    menuItems.forEach((menuItem) => {
-      menuItem.addEventListener('mouseenter', () => {
-        // Decide if we pop up 1 or 2 stickers
-        const count = Math.random() > 0.5 ? 2 : 1;
-        const hrefAttr = menuItem.getAttribute('href') || '';
-        
-        let specificSticker = null;
-        for (const [key, val] of Object.entries(optionStickers)) {
-          if (hrefAttr.includes(key)) {
-            specificSticker = val;
-            break;
-          }
-        }
-
-        // Keep track of chosen stickers for this event to avoid repeating
-        const chosenSrcs = [];
-
-        for (let i = 0; i < count; i++) {
-          let src = '';
-          if (i === 0 && specificSticker) {
-            src = specificSticker;
-          } else {
-            // Filter pool to exclude any sticker already chosen in this hover event
-            const availablePool = allStickersPool.filter(s => !chosenSrcs.includes(s));
-            src = availablePool[Math.floor(Math.random() * availablePool.length)];
-          }
-          chosenSrcs.push(src);
-
-          // Pick left or right side randomly to avoid overlapping the central text
-          const isLeft = Math.random() > 0.5;
-          const leftMin = isLeft ? 0.03 : 0.78;
-          const leftMax = isLeft ? 0.22 : 0.97;
-          const targetPctX = leftMin + Math.random() * (leftMax - leftMin);
-          const targetPctY = 0.2 + Math.random() * 0.55; // 20% to 75% height
-
-          const targetX = window.innerWidth * targetPctX;
-          const targetY = window.innerHeight * targetPctY;
-          // Compensate for the larger sticker width/height (anchor at center)
-          const adjustedX = targetX - 140; 
-          const adjustedY = targetY - 140;
-
-          const startX = adjustedX + (Math.random() * 60 - 30);
-          const rot = Math.random() * 70 - 35; // random rotation -35deg to +35deg
-
-          const img = document.createElement('img');
-          img.src = src;
-          img.className = 'menu-popup-sticker';
-          img.style.setProperty('--start-x', startX + 'px');
-          img.style.setProperty('--target-x', adjustedX + 'px');
-          img.style.setProperty('--target-y', adjustedY + 'px');
-          img.style.setProperty('--target-rot', rot + 'deg');
+    const supportsHover = window.matchMedia('(hover: hover)').matches;
+    if (supportsHover) {
+      const menuItems = menuNav.querySelectorAll('.menu-item');
+      menuItems.forEach((menuItem) => {
+        menuItem.addEventListener('mouseenter', () => {
+          // Decide if we pop up 1 or 2 stickers
+          const count = Math.random() > 0.5 ? 2 : 1;
+          const hrefAttr = menuItem.getAttribute('href') || '';
           
-          menuNav.appendChild(img);
+          let specificSticker = null;
+          for (const [key, val] of Object.entries(optionStickers)) {
+            if (hrefAttr.includes(key)) {
+              specificSticker = val;
+              break;
+            }
+          }
 
-          // Trigger reflow to register style variables
-          img.offsetWidth;
-          img.classList.add('fly-up');
+          // Keep track of chosen stickers for this event to avoid repeating
+          const chosenSrcs = [];
 
-          // Transition out
-          setTimeout(() => {
-            img.classList.remove('fly-up');
-            img.classList.add('fade-out');
-          }, 950);
+          for (let i = 0; i < count; i++) {
+            let src = '';
+            if (i === 0 && specificSticker) {
+              src = specificSticker;
+            } else {
+              // Filter pool to exclude any sticker already chosen in this hover event
+              const availablePool = allStickersPool.filter(s => !chosenSrcs.includes(s));
+              src = availablePool[Math.floor(Math.random() * availablePool.length)];
+            }
+            chosenSrcs.push(src);
 
-          // Clean up DOM after fade transition completes
-          setTimeout(() => {
-            img.remove();
-          }, 2250);
-        }
-      }, { passive: true });
-    });
+            // Pick left or right side randomly to avoid overlapping the central text
+            const isLeft = Math.random() > 0.5;
+            const leftMin = isLeft ? 0.03 : 0.78;
+            const leftMax = isLeft ? 0.22 : 0.97;
+            const targetPctX = leftMin + Math.random() * (leftMax - leftMin);
+            const targetPctY = 0.2 + Math.random() * 0.55; // 20% to 75% height
+
+            const targetX = window.innerWidth * targetPctX;
+            const targetY = window.innerHeight * targetPctY;
+            // Compensate for the larger sticker width/height (anchor at center)
+            const adjustedX = targetX - 140; 
+            const adjustedY = targetY - 140;
+
+            const startX = adjustedX + (Math.random() * 60 - 30);
+            const rot = Math.random() * 70 - 35; // random rotation -35deg to +35deg
+
+            const img = document.createElement('img');
+            img.src = src;
+            img.className = 'menu-popup-sticker';
+            img.style.setProperty('--start-x', startX + 'px');
+            img.style.setProperty('--target-x', adjustedX + 'px');
+            img.style.setProperty('--target-y', adjustedY + 'px');
+            img.style.setProperty('--target-rot', rot + 'deg');
+            
+            menuNav.appendChild(img);
+
+            // Trigger reflow to register style variables
+            img.offsetWidth;
+            img.classList.add('fly-up');
+
+            // Transition out
+            setTimeout(() => {
+              img.classList.remove('fly-up');
+              img.classList.add('fade-out');
+            }, 950);
+
+            // Clean up DOM after fade transition completes
+            setTimeout(() => {
+              img.remove();
+            }, 2250);
+          }
+        }, { passive: true });
+      });
+    }
   });
 
 })();

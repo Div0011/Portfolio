@@ -1326,3 +1326,194 @@ a.info__contact.active-copy {
   z-index: 20 !important;
   box-shadow: inset 0 0 35px 25px #e5e2d6 !important;
 }
+
+/* ============================================================
+   MOBILE & TOUCH OVERRIDES
+   ============================================================ */
+@media (hover: none) {
+  /* Disable custom SVG cursor and restore native pointer behavior */
+  .cursor, 
+  .txt-cursor {
+    display: none !important;
+  }
+  
+  body.is--cursor,
+  body.is--cursor *,
+  html body,
+  html body * {
+    cursor: auto !important;
+  }
+}
+
+@media (max-width: 991px) {
+  /* Hide custom cursor dot entirely on mobile/tablet viewports */
+  .cursor {
+    display: none !important;
+  }
+
+  /* Contact page body scrolling enablement */
+  html body {
+    overflow: auto !important;
+    height: auto !important;
+  }
+
+  /* Contact cards vertical stacking */
+  .wrapper-info__contact {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    height: auto !important;
+    gap: 16px !important;
+  }
+  .info__contact {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* About page sticker scaling down */
+  .wrapper-stickers-about .draggable img {
+    transform: scale(0.7) !important;
+  }
+
+  /* Skills cassettes vertical stacking & accordion style */
+  .cl-layout-vhs {
+    flex-direction: column !important;
+    height: auto !important;
+    width: 100% !important;
+    gap: 16px !important;
+    transform: none !important;
+  }
+  .cl-list-vhs {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .dropdown-vhs {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  .vhs-side {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 80px !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 12px 20px !important;
+    box-sizing: border-box !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .wrapper-titre__vhs,
+  .wrapper-titre__vhs.vertical,
+  .wrapper-titre__vhs-small,
+  .wrapper-titre__vhs-small.vertical {
+    writing-mode: horizontal-tb !important;
+    -webkit-writing-mode: horizontal-tb !important;
+    -ms-writing-mode: horizontal-tb !important;
+    height: auto !important;
+    width: auto !important;
+    margin: 0 !important;
+    flex-direction: row !important;
+    flex-grow: 1 !important;
+    padding-left: 16px !important;
+    justify-content: flex-start !important;
+    display: flex !important;
+  }
+  
+  .titre__vhs {
+    writing-mode: horizontal-tb !important;
+    -webkit-writing-mode: horizontal-tb !important;
+    -ms-writing-mode: horizontal-tb !important;
+    font-size: 16px !important;
+    text-align: left !important;
+    color: #000000 !important;
+  }
+  
+  .category-badge__vhs {
+    margin: 0 !important;
+    position: static !important;
+    font-size: 10px !important;
+    order: 1;
+  }
+  
+  .wrapper-vignette__vhs {
+    width: 44px !important;
+    height: 44px !important;
+    margin: 0 !important;
+    order: 2;
+  }
+  
+  .annee__vhs {
+    margin: 0 !important;
+    position: static !important;
+    order: 4;
+    font-size: 13px !important;
+    color: #000000 !important;
+  }
+
+  /* When expanded/opened (w--open) */
+  .vhs-side.w--open {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    height: auto !important;
+    min-height: auto !important;
+    background: rgba(17, 17, 17, 0.98) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.45) !important;
+    padding: 24px !important;
+  }
+
+  .vhs-side.w--open .wrapper-titre__vhs {
+    display: none !important;
+  }
+  
+  .vhs-side.w--open .wrapper-vignette__vhs {
+    width: 80px !important;
+    height: 80px !important;
+    margin: 0 auto 16px auto !important;
+    order: 0 !important;
+  }
+  
+  .vhs-side.w--open .category-badge__vhs {
+    position: absolute !important;
+    left: 24px !important;
+    bottom: 24px !important;
+    margin: 0 !important;
+    order: 99 !important;
+  }
+  
+  .vhs-side.w--open .annee__vhs {
+    position: absolute !important;
+    right: 24px !important;
+    bottom: 24px !important;
+    margin: 0 !important;
+    order: 100 !important;
+    color: #e5e2d6 !important;
+  }
+  
+  .vhs-side.w--open .vhs-side-info-container {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    margin: 0 0 40px 0 !important;
+  }
+  
+  .vhs-side.w--open .vhs-side-info-container,
+  .vhs-side.w--open .vhs-side-info-container * {
+    color: #e5e2d6 !important;
+  }
+}
+
+@media (max-width: 479px) {
+  /* Projects slideshow padding adjustments on small screens */
+  .projects-slider-viewport .layout-projet__post-prod.prod-service {
+    padding: 15px !important;
+  }
+  .projects-slider-viewport .wrapper-top__postprod {
+    grid-template-columns: 1fr !important;
+  }
+}
+
