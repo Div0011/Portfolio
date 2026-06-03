@@ -857,9 +857,7 @@ video {
 /* ============================================================
    FONT DISPLAY — prevent FOUT / FOIT
    ============================================================ */
-@font-face {
-  font-display: swap;
-}
+
 
 /* ============================================================
    PROJECTS SLIDESHOW — stable height prevents layout shift
@@ -1514,6 +1512,510 @@ a.info__contact.active-copy {
   }
   .projects-slider-viewport .wrapper-top__postprod {
     grid-template-columns: 1fr !important;
+  }
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE OVERRIDES
+   ============================================================ */
+
+@media (max-width: 991px) {
+  /* 1. Reset vertical-to-horizontal scrolling layout on Skills page */
+  .section-height {
+    height: auto !important;
+  }
+  .sticky-element {
+    position: relative !important;
+    height: auto !important;
+    top: auto !important;
+  }
+
+  /* 2. Skills: horizontally swipeable list on mobile viewports */
+  .cl-list-wrapper {
+    overflow-x: auto !important;
+    width: 100vw !important;
+    margin-left: -5vw !important;
+    padding-left: 5vw !important;
+    padding-right: 5vw !important;
+    box-sizing: border-box !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 24px !important;
+    overscroll-behavior-x: contain !important;
+  }
+  .cl-layout-vhs {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    width: max-content !important;
+    gap: 16px !important;
+    align-items: start !important;
+    padding-right: 5vw !important;
+  }
+  .cl-list-vhs {
+    flex: 0 0 280px !important;
+    width: 280px !important;
+    scroll-snap-align: start !important;
+  }
+  .vhs-side.w--open {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 3. Projects: stack horizontally-sliding items vertically */
+  .projects-slider-viewport {
+    background: transparent !important;
+    border: none !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+  .cl_prod-service.w-dyn-items {
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    transform: none !important;
+    gap: 24px !important;
+    width: 100% !important;
+  }
+  .layout-projet__post-prod.prod-service {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 20px !important;
+    background: rgba(26, 26, 26, 0.4) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  /* Hide slideshow nav controls on mobile */
+  .slider-arrow,
+  .slider-dots {
+    display: none !important;
+  }
+
+  /* 4. Remove elements better with cursor/pointer (keep for laptop only) */
+  .wrapper-stickers-about .draggable {
+    display: none !important;
+  }
+  .about-slideshow-speech {
+    display: none !important;
+  }
+  .menu-permanent-sticker {
+    display: none !important;
+  }
+  .trail-section,
+  .trail-wrap,
+  .trail-list,
+  .trail-item {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  /* 5. Reduce button sizes for mobile viewports */
+  .btn-arrow {
+    height: 3.5rem !important;
+    padding: 0 1.25rem !important;
+    font-size: 13px !important;
+  }
+  .txt-btn__arrow-1,
+  .txt-btn__arrow-2 {
+    font-size: 12px !important;
+    line-height: 3.5rem !important;
+  }
+  .section-projets-post-prod .wrapper-btn-ba .link-post-prod {
+    padding: 8px 16px !important;
+    font-size: 11px !important;
+  }
+
+  /* 6. Stack projects details vertically within cards */
+  .projects-slider-viewport .wrapper-top__postprod {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .projects-slider-viewport .wrapper-affiche__post-prod {
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: 0 auto !important;
+    border-width: 6px !important;
+  }
+  .projects-slider-viewport .wrapper-info__postprod {
+    grid-column: 1 / 2 !important;
+    grid-row: 2 / 3 !important;
+  }
+  .projects-slider-viewport .wrapper-affiche__post-prod {
+    grid-column: 1 / 2 !important;
+    grid-row: 1 / 2 !important;
+  }
+  
+  /* Cinematic video container padding override */
+  .wrapper-cinematic-video {
+    border-width: 4px !important;
+  }
+
+  /* Wrap category filter buttons */
+  .layout-filter-button {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: center !important;
+  }
+  .filter-button {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 479px) {
+  /* 7. Stack experience item date and company vertically to avoid text overflow */
+  .wrapper-price {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
+  .wrapper-price div {
+    text-align: left !important;
+  }
+}
+
+/* ============================================================
+   ADDITIONAL MOBILE/TOUCH VIEWPORTS OPTIMIZATIONS (<= 991px)
+   ============================================================ */
+
+@media (max-width: 991px) {
+  /* Hide hero section video/frames sequence container */
+  .wrapper-video-hero {
+    display: none !important;
+  }
+
+  /* Remove Lottie lamp projector and drone animations */
+  .reunion-island-flag,
+  .projo,
+  .wrapper-drone-test {
+    display: none !important;
+  }
+
+  /* Force skills name vertical orientation and label modes */
+  .vertical {
+    display: -webkit-box !important;
+    writing-mode: vertical-rl !important;
+    -webkit-writing-mode: vertical-rl !important;
+    -ms-writing-mode: vertical-rl !important;
+    -webkit-box-orient: vertical !important;
+    inline-size: fit-content !important;
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
+    overflow: hidden !important;
+  }
+  .titre__vhs {
+    writing-mode: vertical-rl !important;
+    -webkit-writing-mode: vertical-rl !important;
+    -ms-writing-mode: vertical-rl !important;
+  }
+
+  /* Horizontal swipe slider for projects first section (.cl_post-prod) */
+  .cl_post-prod {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 20px !important;
+    padding-bottom: 20px !important;
+    width: 100vw !important;
+    margin-left: -5vw !important;
+    padding-left: 5vw !important;
+    padding-right: 5vw !important;
+    box-sizing: border-box !important;
+    scrollbar-width: none !important;
+    overscroll-behavior-x: contain !important;
+  }
+  .cl_post-prod::-webkit-scrollbar {
+    display: none !important;
+  }
+  .cl_post-prod .layout-projet__post-prod.experience-item-card {
+    flex: 0 0 85% !important;
+    width: 85% !important;
+    max-width: 480px !important;
+    scroll-snap-align: start !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Stack experience cards/plates vertically instead of horizontally */
+  .layout-offre__prod-service {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+  .layout-offre__prod-service .wrapper-info-location {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Contact page responsive stacking & styling */
+  html body {
+    overflow: auto !important;
+    height: auto !important;
+  }
+  .layout-contact {
+    height: auto !important;
+    min-height: 100svh !important;
+    padding-top: 100px !important;
+    padding-bottom: 60px !important;
+    box-sizing: border-box !important;
+  }
+  .wrapper-contact-top {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 40px !important;
+  }
+  .wrapper-info__contact {
+    display: flex !important;
+    flex-flow: row wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    max-width: 480px !important;
+    gap: 12px !important;
+  }
+  
+  /* Redefining buttons as clear horizontal stacked buttons with labels */
+  .fixed-footer-contact a.info__contact {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 10px 16px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 50px !important;
+    text-align: left !important;
+    height: auto !important;
+    min-height: 52px !important;
+    flex: none !important;
+  }
+
+  .fixed-footer-contact a.info__contact.adresse,
+  .fixed-footer-contact a.info__contact.phone {
+    width: calc(50% - 6px) !important;
+    justify-content: center !important;
+    padding: 10px 12px !important;
+    gap: 8px !important;
+  }
+
+  .fixed-footer-contact a.info__contact:not(.adresse):not(.phone) {
+    width: 100% !important;
+  }
+  
+  .fixed-footer-contact .wrapper-icon__contact {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .fixed-footer-contact .icon__contact {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .fixed-footer-contact .wrapper-txt-email {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding-left: 0 !important;
+    margin-right: 8px !important;
+    overflow: hidden !important;
+  }
+
+  .fixed-footer-contact .wrapper-txt-email > div {
+    font-family: 'Outfit', 'Inter', sans-serif !important;
+    font-size: clamp(13px, 3.6vw, 15px) !important;
+    font-weight: 500 !important;
+    color: #e5e2d6 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    text-align: left !important;
+  }
+
+  .fixed-footer-contact a.info__contact .wrapper-copy-email {
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin-left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    border-left: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .fixed-footer-contact a.info__contact .icon__contact-copy {
+    width: 14px !important;
+    height: 14px !important;
+    opacity: 0.8 !important;
+  }
+
+  /* Text suffixes for maps and phone */
+  .fixed-footer-contact a.info__contact.adresse::after {
+    content: "based in India" !important;
+    font-family: 'Outfit', 'Inter', sans-serif !important;
+    font-size: clamp(11px, 3.2vw, 14px) !important;
+    color: #e5e2d6 !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+  }
+  
+  .fixed-footer-contact a.info__contact.phone::after {
+    content: "+91 95285 45302" !important;
+    font-family: 'Outfit', 'Inter', sans-serif !important;
+    font-size: clamp(11px, 3.2vw, 14px) !important;
+    color: #e5e2d6 !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+  }
+  
+  /* Stop animation and stack skills carousel on experience page vertically */
+  .skills-carousel-container {
+    height: auto !important;
+    overflow: visible !important;
+    padding: 20px 0 !important;
+    background: transparent !important;
+    border: none !important;
+    margin-top: 30px !important;
+  }
+  
+  .skills-carousel-track {
+    display: flex !important;
+    flex-flow: row wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 20px 16px !important;
+    width: 100% !important;
+    height: auto !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  
+  /* Hide the duplicate set of cassettes (Set 2) used for horizontal marquee loop */
+  .skills-carousel-track .vhs-side-small:nth-child(n+21) {
+    display: none !important;
+  }
+
+  /* Prevent the cassettes from stretching horizontally on mobile views */
+  .vhs-side-small {
+    width: 120px !important;
+    height: 190px !important;
+    flex-direction: column !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    aspect-ratio: unset !important;
+    grid-column-gap: unset !important;
+    grid-row-gap: unset !important;
+    gap: 8px !important;
+    padding: 8px !important;
+    font-size: 10px !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+  }
+
+  /* Restore vignettes layout to top-aligned vertical-aspect */
+  .vhs-side-small .wrapper-vignette__vhs {
+    width: 100% !important;
+    margin-right: 0 !important;
+    transform: none !important;
+    aspect-ratio: 2.39 !important;
+  }
+
+  /* Restore vertical title text wrapper layout */
+  .vhs-side-small .wrapper-titre__vhs-small.vertical {
+    width: 100% !important;
+    flex: 1 !important;
+    order: unset !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    display: flex !important;
+    align-self: center !important;
+  }
+
+  /* Show and restore category/year text */
+  .vhs-side-small .annee__vhs {
+    display: block !important;
+  }
+
+  /* Show and restore standard logo wrapper */
+  .vhs-side-small .wrapper-logo_std__vhs {
+    display: flex !important;
+    width: 100% !important;
+    transform: none !important;
+  }
+}
+
+
+/* ============================================================
+   MOBILE FOOTER VIEWPORTS OPTIMIZATIONS (<= 767px)
+   ============================================================ */
+
+@media (max-width: 767px) {
+  /* Center and stack the footer elements */
+  .layout-footer {
+    flex-direction: column !important;
+    gap: 20px !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    padding: 20px 0 !important;
+  }
+  
+  /* Make the link wrappers horizontal rows instead of columns */
+  .wrapper-footer {
+    display: flex !important;
+    flex-flow: row wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 12px 20px !important;
+    width: 100% !important;
+  }
+
+  .wrapper-footer a {
+    text-align: center !important;
+    justify-content: center !important;
+    display: inline-flex !important;
+    width: auto !important;
+  }
+
+  /* Force copyright div and location link (in contact/home pages) to stack at the bottom */
+  .wrapper-footer > div:not(.wrapper-footer-ml) {
+    width: 100% !important;
+    text-align: center !important;
+    margin-top: 8px !important;
+    font-size: 14px !important;
+    opacity: 0.7 !important;
+  }
+
+  /* Target the maps location link specifically in contact/home footer to be on its own line */
+  .fixed-footer-contact .wrapper-footer > a:last-child {
+    width: 100% !important;
+    text-align: center !important;
+    margin-top: 4px !important;
+    font-size: 14px !important;
+    opacity: 0.7 !important;
   }
 }
 
